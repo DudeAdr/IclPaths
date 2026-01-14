@@ -1,0 +1,99 @@
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# User-specific files (MonoDevelop/Xamarin Studio)
+*.userprefs
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+
+# Visual Studio 2017/2019 cache/options directory
+.vs/
+
+# Gradle/Maven
+.gradle/
+**/build/
+**/out/
+
+# Others
+*.log
+*.tlog
+*.vspscc
+*.vssscc
+
+# NUnit
+*.VisualState.xml
+TestResult.xml
+nunit-*.xml
+
+# Build artifacts
+*.dll
+*.exe
+*.pdf
+
+# DotCover
+.idea/
+*.dotCover
+
+# Rider
+.idea/
+*.sln.iml
+
+# Visual Studio Code
+.vscode/
+
+# NuGet
+*.nupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+.nuget/
+
+
+# IIS Express
+*.vspscc
+iisexpress/
+
+# Database files
+*.mdf
+*.ldf
+*.ndf
+
+# Local configuration
+appsettings.Development.json
+appsettings.Local.json
+
+# Publish folders
+publish/
+wwwroot/
+
+# JetBrains Rider Cache
+.idea/
+
+# Resharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# Temp
+*.tmp
+*.temp
+
+# Files
+appsettings.Development.json
+launchSettings.json
+
