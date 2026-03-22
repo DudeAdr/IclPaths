@@ -1,4 +1,5 @@
-﻿using IclPaths.API.Domain.Interfaces.RegionInterfaces;
+﻿using IclPaths.API.CustomActionFilters;
+using IclPaths.API.Domain.Interfaces.RegionInterfaces;
 using IclPaths.API.Models.DTO.RegionDTOs;
 using IclPaths.API.Persistance;
 using Microsoft.AspNetCore.Mvc;
@@ -26,45 +27,37 @@ namespace IclPaths.API.Controllers
 
         [HttpGet]
         [Route("{id:Guid}")]
+        [NotFoundIfNull]
         public async Task<IActionResult> GetRegion([FromRoute] Guid id)
         {
             var region = await _regionRepository.GetByIdAsync(id);
-            if (region == null)
-            {
-                return NotFound();
-            }
             return Ok(region);
         }
 
         [HttpPost]
+        [ValidateModel]
         public async Task<IActionResult> AddRegion([FromBody] AddRegionDto addRegionRequestDto)
         {
             var region = await _regionRepository.AddAsync(addRegionRequestDto);
-
             return CreatedAtAction(nameof(GetRegion), new { id = region.Id }, region);
         }
 
         [HttpPut]
         [Route("{id:Guid}")]
+        [ValidateModel]
+        [NotFoundIfNull]
         public async Task<IActionResult> UpdateRegion([FromRoute] Guid id, [FromBody] UpdateRegionDto updateRegionRequestDto)
         {
             var regionModel = await _regionRepository.UpdateAsync(id, updateRegionRequestDto);
-            if (regionModel == null)
-            {
-                return NotFound();
-            }
             return Ok(regionModel);
         }
 
         [HttpDelete]
         [Route("{id:Guid}")]
+        [NotFoundIfNull]
         public async Task<IActionResult> DeleteRegion([FromRoute] Guid id)
         {
             var regionModel = await _regionRepository.DeleteAsync(id);
-            if (regionModel == null)
-            {
-                return NotFound();
-            }
             return Ok(regionModel);
         }
     }
