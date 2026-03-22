@@ -19,17 +19,17 @@ namespace IclPaths.API.Domain.Repositories.RegionRepository
             _mapper = mapper;
         }
 
-        public async Task<Region> AddAsync(AddRegionDto addRegionRequestDto)
+        public async Task<RegionDto> AddAsync(AddRegionDto addRegionRequestDto)
         {
             var region = _mapper.Map<Region>(addRegionRequestDto);
 
             await _dbContext.Regions.AddAsync(region);
             await _dbContext.SaveChangesAsync();
 
-            return region;
+            return _mapper.Map<RegionDto>(region);
         }
 
-        public async Task<Region?> DeleteAsync(Guid id)
+        public async Task<RegionDto?> DeleteAsync(Guid id)
         {
             var regionModel = await _dbContext.Regions.FirstOrDefaultAsync(r => r.Id == id);
             if (regionModel == null)
@@ -38,20 +38,20 @@ namespace IclPaths.API.Domain.Repositories.RegionRepository
             }
             _dbContext.Regions.Remove(regionModel);
             await _dbContext.SaveChangesAsync();
-            return regionModel;
+            return _mapper.Map<RegionDto>(regionModel);
         }
 
-        public async Task<List<Region>> GetAllAsync()
+        public async Task<List<RegionDto>?> GetAllAsync()
         {
-            return await _dbContext.Regions.ToListAsync();
+            return _mapper.Map<List<RegionDto>>(await _dbContext.Regions.ToListAsync());
         }
 
-        public async Task<Region?> GetByIdAsync(Guid id)
+        public async Task<RegionDto?> GetByIdAsync(Guid id)
         {
-            return await _dbContext.Regions.FirstOrDefaultAsync(r => r.Id == id);
+            return _mapper.Map<RegionDto>(await _dbContext.Regions.FirstOrDefaultAsync(r => r.Id == id));
         }
 
-        public async Task<Region?> UpdateAsync(Guid id, UpdateRegionDto updateRegionRequestDto)
+        public async Task<RegionDto?> UpdateAsync(Guid id, UpdateRegionDto updateRegionRequestDto)
         {
             var regionModel = await _dbContext.Regions.FirstOrDefaultAsync(r => r.Id == id);
 
@@ -65,7 +65,7 @@ namespace IclPaths.API.Domain.Repositories.RegionRepository
             regionModel.RegionImageUrl = updateRegionRequestDto.RegionImageUrl;
 
             await _dbContext.SaveChangesAsync();
-            return regionModel;
+            return _mapper.Map<RegionDto>(regionModel);
         }
     }
 }

@@ -12,12 +12,10 @@ namespace IclPaths.API.Controllers
     [ApiController]
     public class WalksController : ControllerBase
     {
-        private IMapper _mapper;
         private readonly IWalkPathRepository _walkPathRepository;
 
-        public WalksController(IMapper mapper, IWalkPathRepository walkPathRepository)
+        public WalksController(IWalkPathRepository walkPathRepository)
         {
-            _mapper = mapper;
             _walkPathRepository = walkPathRepository;
         }
         [HttpPost]

@@ -1,10 +1,7 @@
-﻿using AutoMapper;
-using IclPaths.API.Domain.Interfaces.RegionInterfaces;
-using IclPaths.API.Models.Domain;
+﻿using IclPaths.API.Domain.Interfaces.RegionInterfaces;
 using IclPaths.API.Models.DTO.RegionDTOs;
 using IclPaths.API.Persistance;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace IclPaths.API.Controllers
 {
@@ -13,21 +10,18 @@ namespace IclPaths.API.Controllers
     public class RegionsController : ControllerBase
     {
         private readonly IclPathsDbContext _dbContext;
-        private readonly IMapper _mapper;
         private readonly IRegionRepository _regionRepository;
 
-        public RegionsController(IclPathsDbContext dbContext, IMapper mapper, IRegionRepository regionRepository)
+        public RegionsController(IclPathsDbContext dbContext, IRegionRepository regionRepository)
         {
             _dbContext = dbContext;
-            _mapper = mapper;
             _regionRepository = regionRepository;
         }
         [HttpGet]
         public async Task<IActionResult> GetAllRegions()
         {
             var regions = await _regionRepository.GetAllAsync();
-            var mapped = _mapper.Map<List<RegionDto>>(regions);
-            return Ok(mapped);
+            return Ok(regions);
         }
 
         [HttpGet]
@@ -39,17 +33,15 @@ namespace IclPaths.API.Controllers
             {
                 return NotFound();
             }
-            var mapped = _mapper.Map<RegionDto>(region);
-            return Ok(mapped);
+            return Ok(region);
         }
 
         [HttpPost]
         public async Task<IActionResult> AddRegion([FromBody] AddRegionDto addRegionRequestDto)
         {
             var region = await _regionRepository.AddAsync(addRegionRequestDto);
-            var regionDto = _mapper.Map<RegionDto>(region);
 
-            return CreatedAtAction(nameof(GetRegion), new { id = regionDto.Id }, regionDto);
+            return CreatedAtAction(nameof(GetRegion), new { id = region.Id }, region);
         }
 
         [HttpPut]
@@ -61,9 +53,7 @@ namespace IclPaths.API.Controllers
             {
                 return NotFound();
             }
-            var regionModelDto = _mapper.Map<RegionDto>(regionModel);
-
-            return Ok(regionModelDto);
+            return Ok(regionModel);
         }
 
         [HttpDelete]
@@ -75,8 +65,7 @@ namespace IclPaths.API.Controllers
             {
                 return NotFound();
             }
-            var regionModelDto = _mapper.Map<RegionDto>(regionModel);
-            return Ok(regionModelDto);
+            return Ok(regionModel);
         }
     }
 }
