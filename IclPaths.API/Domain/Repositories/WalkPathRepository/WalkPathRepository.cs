@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using IclPaths.API.Domain.Interfaces.WalkPathInterfaces;
 using IclPaths.API.Models.Domain;
 using IclPaths.API.Models.DTO.WalkDTOs;
@@ -61,7 +62,10 @@ namespace IclPaths.API.Domain.Repositories.WalkPathRepository
 
         public async Task<WalkPathDto?> GetWalkPathByIdAsync(Guid id)
         {
-            var walkPath = await _dbContext.Paths.FirstOrDefaultAsync(x => x.Id == id);
+            var walkPath = await _dbContext.Paths
+                .Include(p => p.Difficulty)
+                .Include(p => p.Region)
+                .FirstOrDefaultAsync(x => x.Id == id);
             if (walkPath == null)
             {
                 return null;
@@ -72,7 +76,10 @@ namespace IclPaths.API.Domain.Repositories.WalkPathRepository
 
         public async Task<WalkPathDto?> UpdateWalkPathAsync(Guid id, UpdateWalkPathDto updateWalkPathRequestDto)
         {
-            var walkPath = _dbContext.Paths.FirstOrDefault(x => x.Id == id);
+            var walkPath = await _dbContext.Paths
+                .Include(p => p.Difficulty)
+                .Include(p => p.Region)
+                .FirstOrDefaultAsync(x => x.Id == id);
             if (walkPath == null)
             {
                 return null;
@@ -86,8 +93,24 @@ namespace IclPaths.API.Domain.Repositories.WalkPathRepository
 
             await _dbContext.SaveChangesAsync();
 
-            var mappedWalkPath = _mapper.Map<WalkPathDto>(walkPath);
+            var mappedWalkPath = await _dbContext.Paths
+                .Where(p => p.Id == walkPath.Id)
+                .Include(p => p.Region)
+                .Include(p => p.Difficulty)
+                .ProjectTo<WalkPathDto>(_mapper.ConfigurationProvider)
+                .FirstOrDefaultAsync();
+
             return mappedWalkPath;
+        }
+
+        public async Task<IEnumerable<WalkPathDto>> GetAllWalkPathsAsync()
+        {
+            var walkPaths = await _dbContext.Paths
+                .Include(p => p.Region)
+                .Include(p => p.Difficulty)
+                .ToListAsync();
+            var mappedWalkPaths = _mapper.Map<IEnumerable<WalkPathDto>>(walkPaths);
+            return mappedWalkPaths;
         }
     }
 }

@@ -25,6 +25,8 @@ builder.Services.AddScoped<IWalkPathRepository, WalkPathRepository>();
 builder.Services.AddAutoMapper(cfg =>
 {
     cfg.AddProfile<RegionMapper>();
+    cfg.AddProfile<WalkPathMapper>();
+    cfg.AddProfile<DifficultyMapper>();
 });
 
 var app = builder.Build();

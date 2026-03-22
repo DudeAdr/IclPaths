@@ -12,6 +12,7 @@ namespace IclPaths.API.Domain.Interfaces.WalkPathInterfaces
         Task<WalkPathDto?> UpdateWalkPathAsync(Guid id, UpdateWalkPathDto updateWalkPathRequestDto);
         Task<WalkPathDto?> DeleteWalkPathAsync(Guid id);
         Task<IEnumerable<WalkPathDto>> GetWalkPathsAsync(Guid? regionId, Guid? difficultyId);
+        Task<IEnumerable<WalkPathDto>> GetAllWalkPathsAsync();
 
     }
 }

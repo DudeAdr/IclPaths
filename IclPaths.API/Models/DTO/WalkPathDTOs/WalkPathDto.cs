@@ -1,4 +1,7 @@
-﻿namespace IclPaths.API.Models.DTO.WalkPathDTOs
+﻿using IclPaths.API.Models.DTO.DifficultyDTOs;
+using IclPaths.API.Models.DTO.RegionDTOs;
+
+namespace IclPaths.API.Models.DTO.WalkPathDTOs
 {
     public class WalkPathDto
     {
@@ -7,7 +10,8 @@
         public string Description { get; set; }
         public double LengthInKm { get; set; }
         public string? PathImageUrl { get; set; }
-        public Guid RegionId { get; set; }
-        public Guid DifficultyId { get; set; }
+
+        public RegionDto Region  { get; set; }
+        public DifficultyDto Difficulty { get; set; }
     }
 }

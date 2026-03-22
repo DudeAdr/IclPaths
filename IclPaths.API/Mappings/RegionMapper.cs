@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using IclPaths.API.Models.Domain;
+using IclPaths.API.Models.DTO.DifficultyDTOs;
 using IclPaths.API.Models.DTO.RegionDTOs;
 using IclPaths.API.Models.DTO.WalkDTOs;
 using IclPaths.API.Models.DTO.WalkPathDTOs;
@@ -13,8 +14,6 @@ namespace IclPaths.API.Mappings
             CreateMap<Region, RegionDto>()
                 .ReverseMap();
             CreateMap<AddRegionDto, Region>();
-            CreateMap<AddWalkPathDto, WalkPath>().ReverseMap();
-            CreateMap<WalkPath, WalkPathDto>().ReverseMap();
         }
     }
 }

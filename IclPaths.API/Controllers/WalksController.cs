@@ -26,6 +26,15 @@ namespace IclPaths.API.Controllers
             var result = await _walkPathRepository.AddWalkAsync(addWalkPathDto);
             return CreatedAtAction(nameof(GetWalk), new { id = result.Id }, result);
         }
+
+        [HttpGet]
+        [Route("/getAll")]
+        public async Task<IActionResult> GetWalks()
+        {
+            var walks = await _walkPathRepository.GetAllWalkPathsAsync();
+            return Ok(walks);
+        }
+
         [HttpGet]
         [Route("{id:Guid}")]
         public async Task<IActionResult> GetWalk([FromRoute] Guid id)
