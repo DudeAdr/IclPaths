@@ -2,6 +2,7 @@
 using IclPaths.API.Domain.Interfaces.WalkPathInterfaces;
 using IclPaths.API.Models.DTO.WalkDTOs;
 using IclPaths.API.Models.DTO.WalkPathDTOs;
+using IclPaths.API.Models.Enums;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IclPaths.API.Controllers
@@ -26,9 +27,15 @@ namespace IclPaths.API.Controllers
 
         [HttpGet]
         [Route("/getAll")]
-        public async Task<IActionResult> GetWalks()
+        public async Task<IActionResult> GetWalks(
+            [FromQuery] SortAndFilterBy? filterOn,
+            [FromQuery] string? filterQuery,
+            [FromQuery] SortAndFilterBy? sortBy,
+            [FromQuery] bool? isAscending,
+            [FromQuery] int pageNumber = 1,
+            [FromQuery] int pageSize = 1000)
         {
-            var walks = await _walkPathRepository.GetAllWalkPathsAsync();
+            var walks = await _walkPathRepository.GetAllWalkPathsAsync(filterOn, filterQuery, sortBy, isAscending ?? true, pageNumber, pageSize);
             return Ok(walks);
         }
 
