@@ -1,5 +1,4 @@
-﻿using IclPaths.API.Models.Domain;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Numerics;
 
 namespace IclPaths.API.Models.DTO.WalkDTOs

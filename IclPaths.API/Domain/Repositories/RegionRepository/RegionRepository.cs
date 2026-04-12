@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using IclPaths.API.Domain.Interfaces.RegionInterfaces;
-using IclPaths.API.Models.Domain;
+using IclPaths.API.Models.DomainModels.IclPathsDbModels;
 using IclPaths.API.Models.DTO.RegionDTOs;
 using IclPaths.API.Persistance;
 using Microsoft.AspNetCore.Mvc;

@@ -1,4 +1,4 @@
-﻿namespace IclPaths.API.Models.Domain
+﻿namespace IclPaths.API.Models.DomainModels.IclPathsDbModels
 {
     public class WalkPath
     {

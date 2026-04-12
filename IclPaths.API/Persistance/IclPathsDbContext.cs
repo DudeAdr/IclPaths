@@ -1,4 +1,4 @@
-﻿using IclPaths.API.Models.Domain;
+﻿using IclPaths.API.Models.DomainModels.IclPathsDbModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace IclPaths.API.Persistance
@@ -12,6 +12,7 @@ namespace IclPaths.API.Persistance
         public DbSet<Difficulty> Difficulties { get; set; }
         public DbSet<Region> Regions { get; set; }
         public DbSet<WalkPath> Paths { get; set; }
+        public DbSet<Image> Images { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

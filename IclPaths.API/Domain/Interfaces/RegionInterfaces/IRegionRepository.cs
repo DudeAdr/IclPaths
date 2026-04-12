@@ -1,5 +1,4 @@
-﻿using IclPaths.API.Models.Domain;
-using IclPaths.API.Models.DTO.RegionDTOs;
+﻿using IclPaths.API.Models.DTO.RegionDTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IclPaths.API.Domain.Interfaces.RegionInterfaces

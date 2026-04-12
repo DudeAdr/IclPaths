@@ -3,6 +3,7 @@ using IclPaths.API.Domain.Interfaces.WalkPathInterfaces;
 using IclPaths.API.Models.DTO.WalkDTOs;
 using IclPaths.API.Models.DTO.WalkPathDTOs;
 using IclPaths.API.Models.Enums;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IclPaths.API.Controllers
@@ -18,6 +19,7 @@ namespace IclPaths.API.Controllers
             _walkPathRepository = walkPathRepository;
         }
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ValidateModel]
         public async Task<IActionResult> AddWalk([FromBody] AddWalkPathDto addWalkPathDto)
         {
@@ -26,6 +28,7 @@ namespace IclPaths.API.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Reader,Admin")]
         [Route("/getAll")]
         public async Task<IActionResult> GetWalks(
             [FromQuery] SortAndFilterBy? filterOn,
@@ -40,6 +43,7 @@ namespace IclPaths.API.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Reader,Admin")]
         [Route("{id:Guid}")]
         [NotFoundIfNull]
         public async Task<IActionResult> GetWalk([FromRoute] Guid id)
@@ -49,6 +53,7 @@ namespace IclPaths.API.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = "Admin")]
         [Route("{id:Guid}")]
         [ValidateModel]
         [NotFoundIfNull]
@@ -59,6 +64,7 @@ namespace IclPaths.API.Controllers
         }
 
         [HttpDelete]
+        [Authorize(Roles = "Admin")]
         [Route("{id:Guid}")]
         [NotFoundIfNull]
         public async Task<IActionResult> DeleteWalk([FromRoute] Guid id)
@@ -66,7 +72,9 @@ namespace IclPaths.API.Controllers
             var result = await _walkPathRepository.DeleteWalkPathAsync(id);
             return Ok(result);
         }
+
         [HttpGet]
+        [Authorize(Roles = "Reader,Admin")]
         [NotFoundIfNull]
         public async Task<IActionResult> GetWalkPaths([FromQuery] Guid? regionId, [FromQuery] Guid? difficultyId)
         {

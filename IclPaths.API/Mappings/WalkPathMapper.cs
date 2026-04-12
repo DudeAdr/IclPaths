@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using IclPaths.API.Models.Domain;
+using IclPaths.API.Models.DomainModels.IclPathsDbModels;
 using IclPaths.API.Models.DTO.WalkDTOs;
 using IclPaths.API.Models.DTO.WalkPathDTOs;
 

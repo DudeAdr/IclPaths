@@ -80,6 +80,7 @@ appsettings.Local.json
 # Publish folders
 publish/
 wwwroot/
+Images/
 
 # JetBrains Rider Cache
 .idea/
@@ -96,4 +97,3 @@ _ReSharper*/
 # Files
 appsettings.Development.json
 launchSettings.json
-

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using IclPaths.API.Domain.Interfaces.WalkPathInterfaces;
-using IclPaths.API.Models.Domain;
+using IclPaths.API.Models.DomainModels.IclPathsDbModels;
 using IclPaths.API.Models.DTO.WalkDTOs;
 using IclPaths.API.Models.DTO.WalkPathDTOs;
 using IclPaths.API.Models.Enums;

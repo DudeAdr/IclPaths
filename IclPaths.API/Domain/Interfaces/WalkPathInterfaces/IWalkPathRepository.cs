@@ -1,5 +1,4 @@
-﻿using IclPaths.API.Models.Domain;
-using IclPaths.API.Models.DTO.WalkDTOs;
+﻿using IclPaths.API.Models.DTO.WalkDTOs;
 using IclPaths.API.Models.DTO.WalkPathDTOs;
 using IclPaths.API.Models.Enums;
 using Microsoft.AspNetCore.Mvc;
