@@ -5,7 +5,6 @@ using IclPaths.API.Models.DTO.RegionDTOs;
 using IclPaths.API.Persistance;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
 
 namespace IclPaths.API.Controllers
 {
@@ -21,7 +20,7 @@ namespace IclPaths.API.Controllers
         }
 
         [HttpGet]
-        //[Authorize(Roles = "Reader,Admin")]
+        [Authorize(Roles = "Reader,Admin")]
         public async Task<IActionResult> GetAllRegions()
         {
             var regions = await _regionRepository.GetAllAsync();
@@ -29,7 +28,7 @@ namespace IclPaths.API.Controllers
         }
 
         [HttpGet]
-        //[Authorize(Roles = "Reader,Admin")]
+        [Authorize(Roles = "Reader,Admin")]
         [Route("{id:Guid}")]
         [NotFoundIfNull]
         public async Task<IActionResult> GetRegion([FromRoute] Guid id)
@@ -39,7 +38,7 @@ namespace IclPaths.API.Controllers
         }
 
         [HttpPost]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [ValidateModel]
         public async Task<IActionResult> AddRegion([FromBody] AddRegionDto addRegionRequestDto)
         {
@@ -48,7 +47,7 @@ namespace IclPaths.API.Controllers
         }
 
         [HttpPut]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [Route("{id:Guid}")]
         [ValidateModel]
         [NotFoundIfNull]
@@ -59,7 +58,7 @@ namespace IclPaths.API.Controllers
         }
 
         [HttpDelete]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [Route("{id:Guid}")]
         [NotFoundIfNull]
         public async Task<IActionResult> DeleteRegion([FromRoute] Guid id)
