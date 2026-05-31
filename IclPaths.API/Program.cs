@@ -1,24 +1,43 @@
+using Asp.Versioning;
+using IclPaths.API.Domain.Interfaces;
+using IclPaths.API.Domain.Interfaces.AuthInterfaces;
 using IclPaths.API.Domain.Interfaces.RegionInterfaces;
 using IclPaths.API.Domain.Interfaces.WalkPathInterfaces;
+using IclPaths.API.Domain.Repositories;
+using IclPaths.API.Domain.Repositories.AuthRepository;
 using IclPaths.API.Domain.Repositories.RegionRepository;
 using IclPaths.API.Domain.Repositories.WalkPathRepository;
 using IclPaths.API.Mappings;
+using IclPaths.API.Middlewares;
 using IclPaths.API.Persistance;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json.Converters;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Identity;
-using IclPaths.API.Domain.Interfaces.AuthInterfaces;
-using IclPaths.API.Domain.Repositories.AuthRepository;
-using Microsoft.OpenApi.Models;
-using IclPaths.API.Domain.Interfaces;
-using IclPaths.API.Domain.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using Newtonsoft.Json.Converters;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+var logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .WriteTo.File("Logs/IclPaths_log.txt", rollingInterval: RollingInterval.Day)
+    .MinimumLevel.Information()
+    .CreateLogger();
+
+builder.Logging.ClearProviders();
+builder.Logging.AddSerilog(logger);
+
+builder.Services.AddApiVersioning(opt =>
+{
+    opt.AssumeDefaultVersionWhenUnspecified = true;
+    opt.DefaultApiVersion = new ApiVersion(1, 0);
+    opt.ReportApiVersions = true;
+});
 
 builder.Services.AddControllers()
     .AddNewtonsoftJson(options =>
@@ -116,6 +135,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseMiddleware<ExceptionHandlerMiddleware>();
 }
 
 app.UseHttpsRedirection();

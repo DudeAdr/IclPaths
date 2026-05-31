@@ -81,6 +81,7 @@ appsettings.Local.json
 publish/
 wwwroot/
 Images/
+Logs/
 
 # JetBrains Rider Cache
 .idea/
