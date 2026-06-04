@@ -29,6 +29,8 @@ IclPaths is a full-stack application designed to help users explore and manage w
 - **IclPaths.API** - RESTful backend API with comprehensive trail management capabilities
 - **IclPaths.UI** - Simple ASP.NET Core MVC frontend for user interaction and trail discovery
 
+![alt text](image.png)
+
 ## ✨ Features
 
 ### Core Functionality

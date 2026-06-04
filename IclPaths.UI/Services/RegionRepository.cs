@@ -51,6 +51,7 @@ namespace IclPaths.UI.Services
             catch (Exception ex)
             {
                 //log error
+                return null;
             }
         }
 
